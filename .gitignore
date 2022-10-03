@@ -1,0 +1,29 @@
+#Editores
+.idea/
+.vscode/
+
+#Dependencies
+node_modules/
+
+#Production
+build/
+
+temp/
+.env
+
+# testing
+coverage
+
+ormconfig.json
+dist
+
+#Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+#Uploads e assets
+uploads/*
+!uploads/.gitkeep
+src/assets/
