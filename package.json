@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Eduardo Esteves",
+    "email": "eduardostevesdasilva@hotmail.com",
+    "url": "https://www.edusites.com.br"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.18",
