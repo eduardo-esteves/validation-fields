@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-typescript-with-standard-js",
+  "name": "validation-fields",
   "version": "1.0.0",
-  "description": "",
+  "description": "Biblioteca abrangente para validar campos de formulário.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
