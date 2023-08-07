@@ -22,6 +22,7 @@ interface validateFields {
   text: (input: string) => boolean
   isNumber: (input: any) => boolean
   date: (input: string, format?: string) => boolean
+  isDate: (input: string) => boolean
   isLandline: (input: string) => boolean
   isCellPhone: (input: string) => boolean
 }
@@ -159,6 +160,20 @@ const validForm = (): validateFields => {
     },
 
     /**
+     * Validate if the input informed is a date valid
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean}
+     */
+    isDate (input: string): boolean {
+      const date = new Date(input)
+      return date instanceof Date && !isNaN(date.getTime())
+    },
+
+    /**
      * Valida se o input informado é um Telefone Residencial válido
      *
      * @author Eduardo Esteves
@@ -167,7 +182,7 @@ const validForm = (): validateFields => {
      *
      * @return {boolean}
      */
-    isLandline (input: string) {
+    isLandline (input: string): boolean {
       input = input.replace(/[^0-9]+/g, '')
       if (!this.isNumber(input)) {
         return false
@@ -185,7 +200,7 @@ const validForm = (): validateFields => {
      *
      * @return {boolean}
      */
-    isCellPhone (input: string) {
+    isCellPhone (input: string): boolean {
       input = input.replace(/[^0-9]+/g, '')
       if (!this.isNumber(input)) {
         return false
