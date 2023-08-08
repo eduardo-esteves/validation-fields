@@ -24,6 +24,7 @@ interface validateFields {
   date: (input: string, format?: string) => boolean
   isDate: (input: string) => boolean
   formatPtBrDateToEn: (input: string) => boolean | string
+  formatEnDateToPtBr: (input: string) => boolean | string
   isLandline: (input: string) => boolean
   isCellPhone: (input: string) => boolean
 }
@@ -193,6 +194,26 @@ const validForm = (): validateFields => {
       const [day, month, year] = parts
 
       return `${year}-${month}-${day}`
+    },
+
+    /**
+     * Convert a date from American format to Brasilian format.
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean | string}
+     */
+    formatEnDateToPtBr (input: string): boolean | string {
+      if (!this.isDate(input)) {
+        return false
+      }
+
+      const parts = input.split('-')
+      const [year, month, day] = parts
+
+      return `${day}/${month}/${year}`
     },
 
     /**
