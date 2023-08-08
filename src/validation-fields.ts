@@ -173,10 +173,18 @@ const validForm = (): validateFields => {
      */
     isLandline (input: string): boolean {
       input = input.replace(/[^0-9]+/g, '')
+
       if (!this.isNumber(input)) {
         return false
       }
+
       const regex = /^[1-9]{2}[2-5]{1}[0-9]{3}[0-9]{4}$/
+      const areAllDigitsSame = /^(.)\1+$/
+
+      if (areAllDigitsSame.test(input)) {
+        return false
+      }
+
       return regex.test(input)
     },
 
@@ -191,10 +199,18 @@ const validForm = (): validateFields => {
      */
     isCellPhone (input: string): boolean {
       input = input.replace(/[^0-9]+/g, '')
+
       if (!this.isNumber(input)) {
         return false
       }
+
       const regex = /^[1-9]{2}[6-9]{1}[0-9]{8}$/
+      const areAllDigitsSame = /^(.)\1+$/
+
+      if (areAllDigitsSame.test(input)) {
+        return false
+      }
+
       return regex.test(input)
     },
 
