@@ -22,11 +22,11 @@ interface validateFields {
   text: (input: string) => boolean
   isNumber: (input: any) => boolean
   date: (input: string, format?: string) => boolean
+  isLandline: (input: string) => boolean
+  isCellPhone: (input: string) => boolean
   isDate: (input: string) => boolean
   formatPtBrDateToEn: (input: string) => boolean | string
   formatEnDateToPtBr: (input: string) => boolean | string
-  isLandline: (input: string) => boolean
-  isCellPhone: (input: string) => boolean
 }
 
 const validForm = (): validateFields => {
@@ -163,6 +163,42 @@ const validForm = (): validateFields => {
     },
 
     /**
+     * Validate if the input provided is a valid residential phone number.
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean}
+     */
+    isLandline (input: string): boolean {
+      input = input.replace(/[^0-9]+/g, '')
+      if (!this.isNumber(input)) {
+        return false
+      }
+      const regex = /^[1-9]{2}[2-5]{1}[0-9]{3}[0-9]{4}$/
+      return regex.test(input)
+    },
+
+    /**
+     * Validate if the input provided is a valid cel phone number.
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean}
+     */
+    isCellPhone (input: string): boolean {
+      input = input.replace(/[^0-9]+/g, '')
+      if (!this.isNumber(input)) {
+        return false
+      }
+      const regex = /^[1-9]{2}[6-9]{1}[0-9]{8}$/
+      return regex.test(input)
+    },
+
+    /**
      * Validate if the input provided is a date valid.
      *
      * @author Eduardo Esteves
@@ -214,42 +250,6 @@ const validForm = (): validateFields => {
       const [year, month, day] = parts
 
       return `${day}/${month}/${year}`
-    },
-
-    /**
-     * Validate if the input provided is a valid residential phone number.
-     *
-     * @author Eduardo Esteves
-     *
-     * @param {string} input
-     *
-     * @return {boolean}
-     */
-    isLandline (input: string): boolean {
-      input = input.replace(/[^0-9]+/g, '')
-      if (!this.isNumber(input)) {
-        return false
-      }
-      const regex = /^[1-9]{2}[2-5]{1}[0-9]{3}[0-9]{4}$/
-      return regex.test(input)
-    },
-
-    /**
-     * Validate if the input provided is a valid cel phone number.
-     *
-     * @author Eduardo Esteves
-     *
-     * @param {string} input
-     *
-     * @return {boolean}
-     */
-    isCellPhone (input: string): boolean {
-      input = input.replace(/[^0-9]+/g, '')
-      if (!this.isNumber(input)) {
-        return false
-      }
-      const regex = /^[1-9]{2}[6-9]{1}[0-9]{8}$/
-      return regex.test(input)
     }
 
   }
