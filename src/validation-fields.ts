@@ -23,6 +23,7 @@ interface validateFields {
   isNumber: (input: any) => boolean
   date: (input: string, format?: string) => boolean
   isDate: (input: string) => boolean
+  formatPtBrDateToEn: (input: string) => boolean | string
   isLandline: (input: string) => boolean
   isCellPhone: (input: string) => boolean
 }
@@ -30,7 +31,7 @@ interface validateFields {
 const validForm = (): validateFields => {
   return {
     /**
-     * Validate if the input informed is of type null
+     * Validate if the input provided is of type null
      *
      * @author Eduardo Esteves
      *
@@ -43,7 +44,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Validate if the input informed is of type undefined
+     * Validate if the input provided is of type undefined
      *
      * @author Eduardo Esteves
      *
@@ -69,7 +70,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Validate if the input informed is an email valid
+     * Validate if the input provided is an email valid.
      *
      * @author Eduardo Esteves
      *
@@ -85,7 +86,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Validate if input informed is a text valid
+     * Validate if the input provided is a text valid.
      *
      * @author Eduardo Esteves
      *
@@ -104,8 +105,9 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Valida se o input informado é Numérico
-     * Obs não faz distinção do seu tipo '1' == 1
+     * Validate if the input provided is numeric.
+     * Note that it does not distinguish between its types: '1' == 1.
+     *
      * @author Eduardo Esteves
      *
      * @param {any} input
@@ -118,7 +120,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Validate if the input informed is a date valid
+     * Validate if the input provided is a date valid.
      *
      * @author Eduardo Esteves
      *
@@ -160,7 +162,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Validate if the input informed is a date valid
+     * Validate if the input provided is a date valid.
      *
      * @author Eduardo Esteves
      *
@@ -174,7 +176,27 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Valida se o input informado é um Telefone Residencial válido
+     * Convert a date from Brasilian format to Amercan format.
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean | string}
+     */
+    formatPtBrDateToEn (input: string): boolean | string {
+      if (!this.isDate(input)) {
+        return false
+      }
+
+      const parts = input.split('/')
+      const [day, month, year] = parts
+
+      return `${year}-${month}-${day}`
+    },
+
+    /**
+     * Validate if the input provided is a valid residential phone number.
      *
      * @author Eduardo Esteves
      *
@@ -192,7 +214,7 @@ const validForm = (): validateFields => {
     },
 
     /**
-     * Valida se o input informado é um Telefone Celular válido
+     * Validate if the input provided is a valid cel phone number.
      *
      * @author Eduardo Esteves
      *
