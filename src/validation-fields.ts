@@ -19,6 +19,7 @@ interface validateFields {
   isUndefined: (input: any) => boolean
   notInitializeds: (inputs: any[]) => boolean
   email: (input: string) => boolean
+  isValidCpf: (input: string) => boolean
   text: (input: string) => boolean
   isNumber: (input: any) => boolean
   date: (input: string, format?: string) => boolean
@@ -84,6 +85,47 @@ const validForm = (): validateFields => {
       const filter = /^[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}$/i
 
       return !!(filter.test(email))
+    },
+
+    /**
+     * Validate if the input provided is a CPF valid.
+     *
+     * @author Eduardo Esteves
+     *
+     * @param {string} input
+     *
+     * @return {boolean} true se válido
+     */
+    isValidCpf (input) {
+      const cpf = input.replace(/[^\d]+/g, '')
+
+      // Validates the first digit
+      let add = 0
+      for (let i = 0; i < 9; i++) {
+        add += parseInt(cpf.charAt(i)) * (10 - i)
+      }
+      let rev = 11 - (add % 11)
+      if (rev === 10 || rev === 11) {
+        rev = 0
+      }
+      if (rev !== parseInt(cpf.charAt(9))) {
+        return false
+      }
+
+      // Validates the second digit
+      add = 0
+      for (let i = 0; i < 10; i++) {
+        add += parseInt(cpf.charAt(i)) * (11 - i)
+      }
+      rev = 11 - (add % 11)
+      if (rev === 10 || rev === 11) {
+        rev = 0
+      }
+      if (rev !== parseInt(cpf.charAt(10))) {
+        return false
+      }
+
+      return true
     },
 
     /**
